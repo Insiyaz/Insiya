@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reel Prompt Studio</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:linear-gradient(135deg,#fff1f8,#ffd6e8);color:#4a2438}
+header{padding:35px;text-align:center;background:linear-gradient(90deg,#ff5fa2,#ff8fc2);color:white}
+.container{display:grid;grid-template-columns:360px 1fr;gap:25px;padding:30px}
+.card{background:white;border-radius:25px;padding:25px;box-shadow:0 10px 30px #ff9fc455}
+h2{color:#ff4f94}
+label{display:block;margin-top:12px;font-weight:bold}
+input,select,textarea{width:100%;padding:12px;border:0;border-radius:14px;background:#fff5fa;margin-top:5px}
+button{width:100%;margin-top:15px;padding:14px;border:0;border-radius:15px;background:#ff5fa2;color:white;font-weight:bold;cursor:pointer}
+button:hover{opacity:.85}
+.phone{width:280px;aspect-ratio:9/16;background:white;border-radius:35px;margin:auto;padding:20px;box-shadow:0 15px 35px #0003;text-align:center}
+.top{height:100px;background:linear-gradient(135deg,#ff5fa2,#ffb0d0);margin:-20px -20px 20px;border-radius:35px 35px 0 0}
+.output{margin-top:20px;padding:15px;background:#fff5fa;border-radius:15px}
+@media(max-width:800px){.container{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<h1>🎀 Reel Prompt Studio</h1>
+<p>Create short-form video plans with a cute pink creative studio vibe</p>
+</header>
+
+<div class="container">
+<div class="card">
+<h2>Create Reel</h2>
+<label>Topic</label><input id="topic" placeholder="Enter your topic">
+<label>Audience</label><input id="audience" placeholder="Who is it for?">
+<label>Purpose</label>
+<select id="purpose"><option>Teach</option><option>Entertain</option><option>Explain</option><option>Inspire</option><option>Review</option></select>
+<label>Platform</label>
+<select id="platform"><option>TikTok</option><option>Instagram Reels</option><option>YouTube Shorts</option></select>
+<label>Tone</label>
+<select id="tone"><option>Funny</option><option>Informative</option><option>Bold</option><option>Calm</option><option>Dramatic</option></select>
+<button onclick="example()">✨ Try Example</button>
+<button onclick="generate()">💗 Generate Plan</button>
+<div class="output" id="output">Your reel plan will appear here.</div>
+</div>
+
+<div class="card">
+<h2>Live Preview</h2>
+<div class="phone">
+<div class="top"></div>
+<h2 id="preview">Your Topic</h2>
+<p>🎬 Your branded reel preview</p>
+</div>
+</div>
+</div>
+
+<script>
+const topic=document.getElementById("topic");
+topic.oninput=()=>preview.textContent=topic.value||"Your Topic";
+
+function example(){
+topic.value="How Volcanoes Work";
+audience.value="Students";
+preview.textContent=topic.value;
+}
+
+function generate(){
+let t=topic.value||"your topic";
+output.innerHTML=`
+<b>Hooks:</b><br>
+1. Did you know something surprising about ${t}?<br>
+2. Here's a quick explanation of ${t}.<br>
+3. The biggest mistake people make about ${t}.<br><br>
+<b>Storyboard:</b><br>
+0-3s: Attention grabbing opening<br>
+3-25s: Explain the main idea<br>
+25-30s: End with a call to action<br><br>
+<b>Caption:</b> Learn something new about ${t}! ✨
+`;
+}
+</script>
+</body>
+</html>
